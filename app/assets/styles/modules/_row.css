@@ -2,15 +2,23 @@
 	
 	@mixin clearfix;
 
-	@mixin atMedium {
-		
-		/* this and overflow: hidden in the wrapper is to hide the final gutter */
-		&--gutters {
-			padding-right: -65px;
-		}
+	/* this and overflow: hidden in the wrapper is to hide the final gutter */
+	&--gutters {
+		padding-right: -65px;
+	}
 
-		&--gutters > div {
-			padding-right: 65px;
+	&--gutters > div {
+		padding-right: 65px;
+	}
+
+	&__b-margin-until-medium {
+		margin-bottom: 1rem;
+	}
+
+	@mixin atMedium {
+
+		&__b-margin-until-medium {
+			margin-bottom: 0;
 		}
 
 		&__col-medium-4 {

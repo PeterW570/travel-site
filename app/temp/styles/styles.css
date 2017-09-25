@@ -465,6 +465,10 @@ img {
 	        box-sizing: border-box;
 }
 
+a {
+	color: #d59541;
+}
+
 .large-hero {
 	position: relative;
 	border-bottom: 10px solid #2f5572;
@@ -640,25 +644,34 @@ img {
 		margin-bottom: 1.6em;
 	}
 
+.headline--no-t-margin {
+		margin-top: 0;
+	}
+
 .row::after {
 		content: "";
 		clear: both;
 		display: table;
 	}
 
+/* this and overflow: hidden in the wrapper is to hide the final gutter */
+
+.row--gutters {
+		padding-right: -65px;
+	}
+
+.row--gutters > div {
+		padding-right: 65px;
+	}
+
+.row__b-margin-until-medium {
+		margin-bottom: 1rem;
+	}
+
 @media (min-width: 800px) {
 
-.row {
-		
-		/* this and overflow: hidden in the wrapper is to hide the final gutter */
-	
-}
-		.row--gutters {
-			padding-right: -65px;
-		}
-
-		.row--gutters > div {
-			padding-right: 65px;
+		.row__b-margin-until-medium {
+			margin-bottom: 0;
 		}
 
 		.row__col-medium-4 {
@@ -678,3 +691,19 @@ img {
 		.row__col-medium-8--smaller {
 			width: 63%;
 		}}
+
+.generic-content-container p {
+		line-height: 1.65;
+		margin: 1.8rem 0;
+	}
+
+@media (min-width: 540px) {
+
+.generic-content-container p {
+			font-size: 1.125rem
+	}}
+
+.generic-content-container p a {
+		font-weight: 700;
+
+	}
