@@ -1,20 +1,25 @@
 .row {
 	
 	@mixin clearfix;
-	
-	&--gutters {
-		padding-right: -65px;
-	}
-	
-	&--gutters > div {
-		padding-right: 65px;
-	}
-	
+
 	@mixin atMedium {
 		
+		/* this and overflow: hidden in the wrapper is to hide the final gutter */
+		&--gutters {
+			padding-right: -65px;
+		}
+
+		&--gutters > div {
+			padding-right: 65px;
+		}
+
 		&__col-medium-4 {
 			float: left;
 			width: 33.33%;
+		}
+
+		&__col-medium-4--larger {
+			width: 37%;
 		}
 
 		&__col-medium-8 {
@@ -22,6 +27,10 @@
 			width: 66.66%;
 		}
 		
+		&__col-medium-8--smaller {
+			width: 63%;
+		}
+
 	}
 	
 }

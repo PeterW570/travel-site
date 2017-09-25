@@ -550,9 +550,11 @@ img {
 .wrapper {
 	padding-left: 18px;
 	padding-right: 18px;
-	max-width: 1200px;
+	max-width: 1236px;
 	margin-left: auto;
 	margin-right: auto;
+
+	/* to hide the final column gutter (see _row.css) */
 	overflow: hidden;
 }
 
@@ -564,6 +566,16 @@ img {
 		padding-left: 0;
 		padding-right: 0;
 	}
+
+.wrapper.wrapper--b-margin {
+		margin-bottom: 1rem;
+	}
+
+@media (min-width: 540px) {
+
+.wrapper.wrapper--b-margin {
+			margin-bottom: 3.875rem
+	}}
 
 .page-section {
 	padding: 1.2rem 0;
@@ -634,22 +646,35 @@ img {
 		display: table;
 	}
 
-.row--gutters {
-		padding-right: -65px;
-	}
-
-.row--gutters > div {
-		padding-right: 65px;
-	}
-
 @media (min-width: 800px) {
+
+.row {
 		
+		/* this and overflow: hidden in the wrapper is to hide the final gutter */
+	
+}
+		.row--gutters {
+			padding-right: -65px;
+		}
+
+		.row--gutters > div {
+			padding-right: 65px;
+		}
+
 		.row__col-medium-4 {
 			float: left;
 			width: 33.33%;
 		}
 
+		.row__col-medium-4--larger {
+			width: 37%;
+		}
+
 		.row__col-medium-8 {
 			float: left;
 			width: 66.66%;
+		}
+		
+		.row__col-medium-8--smaller {
+			width: 63%;
 		}}
