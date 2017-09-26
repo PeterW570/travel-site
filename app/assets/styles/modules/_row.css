@@ -4,11 +4,19 @@
 
 	/* this and overflow: hidden in the wrapper is to hide the final gutter */
 	&--gutters {
-		padding-right: -65px;
+		margin-right: -65px;
+	}
+
+	&--gutters-large {
+		margin-right: -100px;
 	}
 
 	&--gutters > div {
 		padding-right: 65px;
+	}
+
+	&--gutters-large > div {
+		padding-right: 100px;
 	}
 
 	&__b-margin-until-medium {
@@ -28,6 +36,11 @@
 
 		&__col-medium-4--larger {
 			width: 37%;
+		}
+
+		&__col-medium-6 {
+			float: left;
+			width: 50%;
 		}
 
 		&__col-medium-8 {
