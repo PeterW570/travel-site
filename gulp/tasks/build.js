@@ -1,26 +1,61 @@
 var gulp = require('gulp'),
-	imageMin = require('gulp-imagemin'),
-	del = require('del'),
-	usemin = require('gulp-usemin');
+imagemin = require('gulp-imagemin'),
+del = require('del'),
+usemin = require('gulp-usemin'),
+rev = require('gulp-rev'),
+cssnano = require('gulp-cssnano'),
+uglify = require('gulp-uglify'),
+browserSync = require('browser-sync').create();
 
-gulp.task('beginClean', function() {
-	return del('./dist');
+gulp.task('previewDist', function() {
+  browserSync.init({
+    notify: false,
+    server: {
+      baseDir: "docs"
+    }
+  });
 });
 
-gulp.task('optimiseImages', ['beginClean'], function(){
-	return gulp.src(['./app/assets/images/**/*', '!./app/assets/images/icons', '!./app/assets/images/icons/**/*'])
-		.pipe(imageMin({
-			progressive: true,
-			interlaced: true,
-			multipass: true
-		}))
-		.pipe(gulp.dest('./dist/assets/images'));
+gulp.task('beginCleanDocs', ['icons'], function() {
+  return del("./docs");
 });
 
-gulp.task('usemin', ['beginClean'], function() {
-	return gulp.src('./app/index.html')
-		.pipe(usemin())
-		.pipe(gulp.dest('./dist'));
+gulp.task('copyGeneralFiles', ['beginCleanDocs'], function() {
+  var pathsToCopy = [
+    './app/**/*',
+    '!./app/index.html',
+    '!./app/assets/images/**',
+    '!./app/assets/styles/**',
+    '!./app/assets/scripts/**',
+    '!./app/temp',
+    '!./app/temp/**'
+  ];
+
+  return gulp.src(pathsToCopy)
+    .pipe(gulp.dest("./docs"));
 });
 
-gulp.task('build', ['beginClean','optimiseImages', 'usemin']);
+gulp.task('optimizeImages', ['beginCleanDocs'], function() {
+  return gulp.src(['./app/assets/images/**/*', '!./app/assets/images/icons', '!./app/assets/images/icons/**/*'])
+    .pipe(imagemin({
+      progressive: true,
+      interlaced: true,
+      multipass: true
+    }))
+    .pipe(gulp.dest("./docs/assets/images"));
+});
+
+gulp.task('useminTrigger', ['beginCleanDocs'], function() {
+  gulp.start("usemin");
+});
+
+gulp.task('usemin', ['styles', 'scripts'], function() {
+  return gulp.src("./app/index.html")
+    .pipe(usemin({
+      css: [function() {return rev();}, function() {return cssnano();}],
+      js: [function() {return rev();}, function() {return uglify();}]
+    }))
+    .pipe(gulp.dest("./docs"));
+});
+
+gulp.task('build', ['beginCleanDocs', 'copyGeneralFiles', 'optimizeImages', 'useminTrigger']);
